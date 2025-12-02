@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rompiendo el Silencio — Alto a la Violencia de Género</title>
+  <style>
+    :root{
+      --primary: #8a1e5a;
+      --primary-dark: #6b1545;
+      --secondary: #c96bb3;
+      --accent: #e74c3c;
+      --bg-light: #fff9fb;
+      --text-dark: #2c3e50;
+      --text-muted: #666;
+      --success: #27ae60;
+      --warning: #f39c12;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    
+    *{box-sizing:border-box;margin:0;padding:0}
+    
+    body{
+      background:var(--bg-light);
+      color:var(--text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    
+    /* Hero Section - Página de inicio */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      background: linear-gradient(135deg, rgba(138,30,90,0.95) 0%, rgba(201,107,179,0.9) 100%),
+                  url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1920&q=80') center/cover;
+      color:white;
+      text-align:center;
+      padding:20px;
+      animation: fadeIn 1s ease-in;
+    }
+    
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+    
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:900px;
+      animation: slideUp 1s ease-out;
+    }
+    
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      padding:12px 24px;
+      border-radius:50px;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:0.9rem;
+      margin-bottom:24px;
+      border:2px solid rgba(255,255,255,0.3);
+    }
+    
+    .hero h1{
+      font-size:clamp(2.5rem, 8vw, 5rem);
+      font-weight:900;
+      margin-bottom:20px;
+      text-shadow:2px 4px 8px rgba(0,0,0,0.3);
+      line-height:1.1;
+    }
+    
+    .hero h1 .highlight{
+      color:#ffd700;
+      display:block;
+      margin-top:10px;
+    }
+    
+    .hero p{
+      font-size:clamp(1.1rem, 3vw, 1.5rem);
+      margin-bottom:40px;
+      opacity:0.95;
+      line-height:1.6;
+    }
+    
+    .hero-buttons{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    
+    .btn{
+      padding:16px 32px;
+      border-radius:50px;
+      font-weight:700;
+      text-decoration:none;
+      transition:all 0.3s ease;
+      cursor:pointer;
+      border:none;
+      font-size:1rem;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    
+    .btn-primary{
+      background:white;
+      color:var(--primary);
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .btn-outline{
+      background:transparent;
+      color:white;
+      border:2px solid white;
+    }
+    
+    .btn-outline:hover{
+      background:white;
+      color:var(--primary);
+    }
+    
+    .scroll-indicator{
+      position:absolute;
+      bottom:30px;
+      left:50%;
+      transform:translateX(-50%);
+      animation:bounce 2s infinite;
+      cursor:pointer;
+    }
+    
+    .scroll-indicator svg{
+      width:30px;
+      height:30px;
+      opacity:0.8;
+    }
+    
+    /* Main Content */
+    .main-header{
+      background:linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Título principal más grande y vistoso */
+    .main-header h2{
+      font-size:clamp(2.5rem, 6vw, 4rem);
+      font-weight:900;
+      margin-bottom:12px;
+      text-shadow:3px 3px 12px rgba(0,0,0,0.3);
+      letter-spacing:2px;
+      background:linear-gradient(to right, #fff 30%, #ffd700 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    
+    .main-header p{
+      opacity:0.9;
+      font-size:1.1rem;
+    }
+
+    main{
+      max-width:1200px;
+      margin:0 auto;
+      padding:40px 20px;
+    }
+    
+    .section{
+      margin-bottom:60px;
+    }
+    
+    .section-title{
+      font-size:2rem;
+      font-weight:800;
+      color:var(--primary);
+      margin-bottom:24px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    
+    .section-title::before{
+      content:'';
+      width:6px;
+      height:40px;
+      background:linear-gradient(180deg, var(--primary), var(--secondary));
+      border-radius:3px;
+    }
+    
+    .card{
+      background:white;
+      border-radius:16px;
+      padding:28px;
+      margin-bottom:24px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.08);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .card h3{
+      font-size:1.5rem;
+      color:var(--primary);
+      margin-bottom:16px;
+      font-weight:700;
+    }
+    
+    .card p{
+      color:var(--text-muted);
+      line-height:1.8;
+    }
+    
+    .card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-top:16px;
+    }
+    
+    /* Grid Layout */
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:28px;
+    }
+    
+    @media(min-width:900px){
+      .grid{grid-template-columns:2fr 1fr}
+    }
+    
+    /* Types of Violence */
+    .violence-types{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+    
+    /* Tarjetas clickeables con cursor pointer */
+    .violence-card{
+      background:linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+      border-left:5px solid var(--primary);
+      padding:20px;
+      border-radius:12px;
+      transition:all 0.3s ease;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+    
+    .violence-card::after{
+      content:'👉 Ver más';
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      font-size:0.8rem;
+      opacity:0;
+      transition:opacity 0.3s ease;
+      color:var(--primary);
+      font-weight:600;
+    }
+    
+    .violence-card:hover{
+      border-left-color:var(--accent);
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    }
+    
+    .violence-card:hover::after{
+      opacity:1;
+    }
+    
+    .violence-card h4{
+      color:var(--primary);
+      font-size:1.2rem;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+    
+    .violence-card p{
+      font-size:0.95rem;
+      color:var(--text-muted);
+    }
+    
+    /* Stats */
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:20px;
+      margin-top:24px;
+    }
+    
+    .stat-card{
+      background:white;
+      padding:24px;
+      border-radius:16px;
+      text-align:center;
+      box-shadow:0 4px 15px rgba(0,0,0,0.08);
+      border-top:4px solid var(--primary);
+    }
+    
+    .stat-card strong{
+      display:block;
+      font-size:2.5rem;
+      color:var(--accent);
+      font-weight:900;
+      margin-bottom:8px;
+    }
+    
+    .stat-card p{
+      font-size:0.95rem;
+      color:var(--text-muted);
+      line-height:1.6;
+    }
+    
+    /* Autotest */
+    .autotest-form{
+      background:linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+      padding:24px;
+      border-radius:16px;
+      border:2px solid #e9ecef;
+    }
+    
+    .question{
+      margin-bottom:20px;
+      padding:16px;
+      background:white;
+      border-radius:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .question label{
+      display:block;
+      font-weight:600;
+      color:var(--text-dark);
+      margin-bottom:10px;
+      font-size:1rem;
+    }
+    
+    .question select{
+      width:100%;
+      padding:12px;
+      border:2px solid #e9ecef;
+      border-radius:8px;
+      font-size:1rem;
+      cursor:pointer;
+      transition:border-color 0.3s ease;
+    }
+    
+    .question select:focus{
+      outline:none;
+      border-color:var(--primary);
+    }
+    
+    /* Emergency Contact */
+    .emergency-box{
+      background:linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+      color:white;
+      padding:28px;
+      border-radius:16px;
+      text-align:center;
+      box-shadow:0 8px 25px rgba(231,76,60,0.3);
+      margin-bottom:24px;
+    }
+    
+    .emergency-box h3{
+      font-size:1.8rem;
+      margin-bottom:16px;
+      color:white;
+    }
+    
+    .emergency-box .phone{
+      display:block;
+      font-size:2.5rem;
+      font-weight:900;
+      color:white;
+      text-decoration:none;
+      margin:16px 0;
+      letter-spacing:2px;
+    }
+    
+    .emergency-box p{
+      opacity:0.95;
+      font-size:1.05rem;
+    }
+    
+    /* Results */
+    .result{
+      padding:20px;
+      border-radius:12px;
+      margin-top:20px;
+      font-weight:600;
+      text-align:center;
+      animation:slideIn 0.5s ease;
+    }
+    
+    .result.danger{
+      background:#ffe5e5;
+      color:#c0392b;
+      border:2px solid #e74c3c;
+    }
+    
+    .result.warning{
+      background:#fff8e5;
+      color:#d68910;
+      border:2px solid #f39c12;
+    }
+    
+    .result.safe{
+      background:#e8f8f5;
+      color:#1e8449;
+      border:2px solid #27ae60;
+    }
+    
+    /* Footer */
+    footer{
+      background:var(--text-dark);
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+      margin-top:60px;
+    }
+    
+    footer p{
+      opacity:0.8;
+      line-height:1.8;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+    
+    @keyframes slideUp{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+    
+    @keyframes slideIn{
+      from{
+        opacity:0;
+        transform:translateX(-20px);
+      }
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
+    }
+    
+    @keyframes bounce{
+      0%, 20%, 50%, 80%, 100%{transform:translateX(-50%) translateY(0)}
+      40%{transform:translateX(-50%) translateY(-10px)}
+      60%{transform:translateX(-50%) translateY(-5px)}
+    }
+    
+    /* Utility Classes */
+    .text-center{text-align:center}
+    .hidden{display:none}
+    
+    /* Resources List */
+    .resources-list{
+      list-style:none;
+      padding:0;
+    }
+    
+    .resources-list li{
+      padding:16px;
+      margin-bottom:12px;
+      background:white;
+      border-radius:10px;
+      border-left:4px solid var(--primary);
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .resources-list li strong{
+      color:var(--primary);
+      display:block;
+      margin-bottom:6px;
+      font-size:1.1rem;
+    }
+    
+    /* Report Form */
+    textarea, input[type="text"]{
+      width:100%;
+      padding:14px;
+      border:2px solid #e9ecef;
+      border-radius:10px;
+      font-family:inherit;
+      font-size:1rem;
+      transition:border-color 0.3s ease;
+    }
+    
+    textarea:focus, input:focus{
+      outline:none;
+      border-color:var(--primary);
+    }
+    
+    textarea{
+      resize:vertical;
+      min-height:120px;
+    }
+    
+    .form-label{
+      display:block;
+      font-weight:600;
+      margin-bottom:8px;
+      color:var(--text-dark);
+    }
+    
+    .form-group{
+      margin-bottom:20px;
+    }
+    
+    .button-group{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    
+    .reports-container{
+      margin-top:20px;
+    }
+    
+    .report-item{
+      background:#f8f9fa;
+      padding:16px;
+      border-radius:10px;
+      margin-bottom:12px;
+      border-left:4px solid var(--secondary);
+    }
+    
+    .report-item strong{
+      color:var(--primary);
+      display:block;
+      margin-bottom:8px;
+    }
+    
+    .report-item .date{
+      font-size:0.85rem;
+      color:var(--text-muted);
+      margin-top:8px;
+    }
+    
+    /* Modal para mostrar detalles de violencia */
+    .modal{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.75);
+      z-index:1000;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      animation:fadeIn 0.3s ease;
+    }
+    
+    .modal.active{
+      display:flex;
+    }
+    
+    .modal-content{
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      max-width:700px;
+      max-height:90vh;
+      overflow-y:auto;
+      position:relative;
+      animation:slideUp 0.4s ease;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      font-size:2rem;
+      cursor:pointer;
+      color:var(--text-muted);
+      width:40px;
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      transition:all 0.3s ease;
+    }
+    
+    .modal-close:hover{
+      background:var(--bg-light);
+      color:var(--primary);
+      transform:rotate(90deg);
+    }
+    
+    .modal-content h2{
+      color:var(--primary);
+      font-size:2rem;
+      margin-bottom:16px;
+      font-weight:800;
+    }
+    
+    .modal-content p{
+      color:var(--text-dark);
+      line-height:1.8;
+      margin-bottom:16px;
+      font-size:1.05rem;
+    }
+    
+    .modal-content img{
+      width:100%;
+      height:300px;
+      object-fit:cover;
+      border-radius:12px;
+      margin:20px 0;
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .modal-content ul{
+      list-style:none;
+      padding:0;
+      margin:20px 0;
+    }
+    
+    .modal-content ul li{
+      padding:12px 0;
+      border-bottom:1px solid #e9ecef;
+      color:var(--text-dark);
+      font-size:1rem;
+    }
+    
+    .modal-content ul li:before{
+      content:'•';
+      color:var(--primary);
+      font-weight:900;
+      display:inline-block;
+      width:1em;
+      font-size:1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section - Página de Inicio -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">ÚNETE AL CAMBIO</div>
+      <h1>
+        ALTO A LA
+        <span class="highlight">VIOLENCIA DE GÉNERO</span>
+      </h1>
+      <p>No más silencio. No más miedo. Es tiempo de alzar la voz, proteger vidas y construir un futuro sin violencia.</p>
+      <div class="hero-buttons">
+        <a href="#main-content" class="btn btn-primary">Informate Ahora</a>
+        <a href="#recursos" class="btn btn-outline">Buscar Ayuda</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('main-content').scrollIntoView({behavior:'smooth'})">
+      <svg fill="white" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+    </div>
+  </section>
+
+  <!-- Main Header -->
+  <header class="main-header" id="main-content">
+    <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+      <img src="images/cadena-rota.png" alt="Cadena rota" style="width:60px;height:60px;filter:brightness(0) invert(1);">
+      <h2>Rompiendo el Silencio</h2>
+      <img src="images/silencio.png" alt="Romper el silencio" style="width:60px;height:60px;filter:brightness(0) invert(1);">
+    </div>
+    <p>Información, recursos y herramientas para prevenir y combatir la violencia de género</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <!-- Columna Principal -->
+      <div>
+        <!-- ¿Qué es la violencia de género? -->
+        <section class="section">
+          <h2 class="section-title">¿Qué es la violencia de género?</h2>
+          <div class="card">
+            <h3>Definición</h3>
+            <p>Es cualquier acto de violencia dirigido contra una persona por su género o identidad de género, que cause daño físico, sexual, psicológico o económico. Está basada en relaciones de poder desiguales y discriminación.</p>
+            <p style="margin-top:12px">El <strong>género</strong> es una construcción social: son las expectativas, roles y normas que una sociedad asigna a las personas. Aunque puede afectar a personas de distintos géneros, las mujeres y niñas son las más afectadas en la mayoría de contextos.</p>
+            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80" alt="Manos unidas en apoyo">
+          </div>
+        </section>
+
+        <!-- Tipos de Violencia -->
+        <section class="section">
+          <h2 class="section-title">Tipos de violencia de género</h2>
+          <div class="violence-types">
+            <!-- Agregando atributo onclick a cada tarjeta -->
+            <div class="violence-card" onclick="showViolenceDetail('fisica')">
+              <h4>🤛 Física</h4>
+              <p>Acciones que dañan el cuerpo: golpes, empujones, estrangulamiento, lesiones físicas.</p>
+            </div>
+            <div class="violence-card" onclick="showViolenceDetail('psicologica')">
+              <h4>🧠 Psicológica</h4>
+              <p>Insultos, humillaciones, amenazas, aislamiento, manipulación emocional constante.</p>
+            </div>
+            <div class="violence-card" onclick="showViolenceDetail('sexual')">
+              <h4>❤️‍🩹 Sexual</h4>
+              <p>Actos sexuales sin consentimiento, violación, acoso, explotación sexual.</p>
+            </div>
+            <div class="violence-card" onclick="showViolenceDetail('economica')">
+              <h4>💰 Económica</h4>
+              <p>Control del dinero, impedir trabajar, apropiación de bienes, privación de recursos.</p>
+            </div>
+            <div class="violence-card" onclick="showViolenceDetail('digital')">
+              <h4>📱 Digital</h4>
+              <p>Ciberacoso, difusión de imágenes íntimas sin permiso, vigilancia por aplicaciones.</p>
+            </div>
+            <div class="violence-card" onclick="showViolenceDetail('simbolica')">
+              <h4>🎭 Simbólica</h4>
+              <p>Mensajes o prácticas que naturalizan la desigualdad y los estereotipos de género.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Estadísticas -->
+        <section class="section">
+          <h2 class="section-title">Cifras que no podemos ignorar</h2>
+          <div class="card">
+            <h3>La magnitud del problema</h3>
+            <p>Los datos revelan una crisis global que exige acción inmediata:</p>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <strong>1 de 3</strong>
+                <p>Mujeres a nivel mundial ha sufrido violencia física o sexual (OMS)</p>
+              </div>
+              <div class="stat-card">
+                <strong>53.8%</strong>
+                <p>De mujeres en Perú han experimentado algún tipo de violencia (ENDES)</p>
+              </div>
+              <div class="stat-card">
+                <strong>+2,000</strong>
+                <p>Atenciones en CEM Junín/Huancayo en períodos recientes</p>
+              </div>
+              <div class="stat-card">
+                <strong>💔</strong>
+                <p>Feminicidios en 2024 que exigen acción urgente</p>
+              </div>
+            </div>
+            <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">
+              <strong>Nota:</strong> Estas cifras provienen de OMS, ONU Mujeres, ENDES, MIMP y CEM. Muchas situaciones no se denuncian; las cifras oficiales suelen subestimar la magnitud real del problema.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Columna Sidebar -->
+      <aside>
+        <!-- Emergencia -->
+        <div class="emergency-box">
+          <h3>🚨 ¿Necesitas ayuda?</h3>
+          <p>Si estás en peligro, llama ahora:</p>
+          <a href="tel:100" class="phone">100</a>
+          <p style="font-size:0.95rem">Línea gratuita 24/7 para víctimas de violencia</p>
+        </div>
+
+        <!-- Autotest -->
+        <section class="card">
+          <h3>🔍 Autotest de 5 preguntas</h3>
+          <p style="color:var(--text-muted);margin-bottom:20px">Responde sinceramente. Si obtienes varias respuestas afirmativas, considera buscar ayuda profesional.</p>
+          
+          <div class="autotest-form">
+            <div class="question">
+              <label>1. ¿Tu pareja te insulta, humilla o ridiculiza?</label>
+              <select id="q1">
+                <option value="">-- Selecciona --</option>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <label>2. ¿Te ha agredido físicamente (golpes, empujones)?</label>
+              <select id="q2">
+                <option value="">-- Selecciona --</option>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <label>3. ¿Controla tu dinero o decisiones económicas?</label>
+              <select id="q3">
+                <option value="">-- Selecciona --</option>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <label>4. ¿Te aísla de tu familia o amistades?</label>
+              <select id="q4">
+                <option value="">-- Selecciona --</option>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="question">
+              <label>5. ¿Sientes miedo o vigilancia constante?</label>
+              <select id="q5">
+                <option value="">-- Selecciona --</option>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="button-group">
+              <button class="btn btn-primary" id="checkBtn">Ver Resultado</button>
+              <button class="btn btn-outline" id="resetBtn">Reiniciar</button>
+            </div>
+
+            <div id="testResult"></div>
+          </div>
+        </section>
+
+        <!-- Recursos de ayuda -->
+        <section class="card" id="recursos">
+          <h3>📞 Recursos de ayuda (Huancayo/Perú)</h3>
+          <ul class="resources-list">
+            <li>
+              <strong>Línea 100</strong>
+              Atención gratuita 24/7 para víctimas de violencia familiar y sexual
+            </li>
+            <li>
+              <strong>CEM Huancayo</strong>
+              Centro de Emergencia Mujer<br>
+              Tel: (064) 231657
+            </li>
+            <li>
+              <strong>Policía Nacional</strong>
+              Emergencias: 105
+            </li>
+            <li>
+              <strong>Emergencias generales</strong>
+              Llamar al: 116
+            </li>
+            <li>
+              <strong>Hospital Regional D.A. Carrión</strong>
+              Atención médica y psicológica
+            </li>
+          </ul>
+        </section>
+
+        <!-- Guardar descripción local -->
+        <section class="card">
+          <h3>📝 Guardar descripción del caso</h3>
+          <p style="color:var(--text-muted);margin-bottom:16px;font-size:0.95rem">Guarda información localmente en tu dispositivo (no se envía a terceros).</p>
+          
+          <div class="form-group">
+            <label class="form-label">Tipo de violencia</label>
+            <select id="reportType" style="width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:1rem">
+              <option value="">-- Selecciona --</option>
+              <option>Física</option>
+              <option>Psicológica / Emocional</option>
+              <option>Sexual</option>
+              <option>Económica / Patrimonial</option>
+              <option>Digital</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <textarea id="reportText" placeholder="Describe brevemente lo ocurrido..."></textarea>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-primary" id="saveBtn">Guardar</button>
+            <button class="btn btn-outline" id="viewBtn">Ver guardados</button>
+          </div>
+
+          <div id="reportsContainer" class="reports-container"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p><strong>Fuentes:</strong> ONU Mujeres, OMS/OPS, ENDES (Perú), Ministerio de la Mujer y Poblaciones Vulnerables (MIMP), Centros de Emergencia Mujer (CEM) — Huancayo / Junín</p>
+    <p style="margin-top:16px">Creado con intención educativa y de apoyo. Esta información es orientativa y no sustituye asesoría profesional.</p>
+    <p style="margin-top:16px;opacity:0.6">© 2025 Proyecto de Concientización - Rompiendo el Silencio</p>
+  </footer>
+
+  <!-- Modal para mostrar detalles de cada tipo de violencia -->
+  <div class="modal" id="violenceModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const violenceData = {
+      fisica: {
+        title: '🤛 Violencia Física',
+        description: 'La violencia física es cualquier acto que cause daño corporal o intente causarlo. Es una de las formas más visibles de violencia de género.',
+        details: [
+          'Golpes, puñetazos, patadas',
+          'Empujones o sacudidas violentas',
+          'Estrangulamiento o asfixia',
+          'Uso de objetos como armas',
+          'Quemaduras, cortaduras o heridas',
+          'Jalones de cabello',
+          'Privación de necesidades básicas (comida, sueño, medicamentos)'
+        ],
+        image: '/images/violencia-fisica.jpg',
+        warning: 'Si estás sufriendo violencia física, tu vida puede estar en peligro. Busca ayuda inmediata llamando al 100 o acudiendo a un lugar seguro.'
+      },
+      psicologica: {
+        title: '🧠 Violencia Psicológica',
+        description: 'Es una forma de maltrato que ataca la autoestima, la salud mental y la autonomía de la persona. Puede ser tan dañina como la violencia física.',
+        details: [
+          'Insultos, humillaciones y desvalorización constante',
+          'Amenazas de daño a ti, tus hijos o seres queridos',
+          'Intimidación y generación de miedo',
+          'Aislamiento de familia y amistades',
+          'Control excesivo de actividades diarias',
+          'Celos patológicos y acusaciones infundadas',
+          'Manipulación emocional y chantaje',
+          'Culpabilización por todo lo que ocurre',
+          'Ignorar o menospreciar tus sentimientos'
+        ],
+        image: '/images/violencia-psicologica.jpg',
+        warning: 'La violencia psicológica deja marcas invisibles pero profundas. No minimices lo que sientes, es válido buscar apoyo.'
+      },
+      sexual: {
+        title: '❤️‍🩹 Violencia Sexual',
+        description: 'Cualquier acto sexual o intento de obtener actos sexuales sin el consentimiento libre y pleno de la persona.',
+        details: [
+          'Violación o intento de violación',
+          'Tocamientos o caricias no deseadas',
+          'Obligar a ver pornografía',
+          'Forzar prácticas sexuales no deseadas',
+          'Acoso sexual verbal o físico',
+          'Explotación o trata sexual',
+          'Obligar a prostituirse',
+          'Negarse a usar protección',
+          'Comentarios sexuales degradantes'
+        ],
+        image: '/images/violencia-sexual.jpg',
+        warning: 'El consentimiento debe ser libre, informado y entusiasta. Si no hay consentimiento, es violencia sexual. No es tu culpa.'
+      },
+      economica: {
+        title: '💰 Violencia Económica',
+        description: 'Control o limitación de los recursos económicos que genera dependencia y vulnerabilidad.',
+        details: [
+          'Control total del dinero del hogar',
+          'Impedir que trabajes o estudies',
+          'No dar dinero para gastos básicos',
+          'Apropiarse de tus ingresos o propiedades',
+          'Destruir documentos importantes',
+          'Generar deudas a tu nombre sin consentimiento',
+          'No pagar pensión alimenticia',
+          'Obligarte a pedir dinero para todo',
+          'Hacer sentir culpable por gastar'
+        ],
+        image: '/images/violencia-economica.jpg',
+        warning: 'La independencia económica es un derecho. Tienes derecho a trabajar, administrar tu dinero y tomar decisiones financieras.'
+      },
+      digital: {
+        title: '📱 Violencia Digital',
+        description: 'Uso de tecnologías digitales para acosar, controlar, intimidar o dañar a una persona.',
+        details: [
+          'Ciberacoso o amenazas por redes sociales',
+          'Difusión de imágenes íntimas sin consentimiento',
+          'Control de contraseñas y acceso a dispositivos',
+          'Vigilancia a través de apps o GPS',
+          'Suplantación de identidad en línea',
+          'Mensajes insistentes o acoso digital',
+          'Publicación de información privada (doxing)',
+          'Extorsión con material íntimo',
+          'Sabotaje de cuentas o reputación online'
+        ],
+        image: '/images/violencia-digital.jpg',
+        warning: 'Guarda evidencia (capturas de pantalla) y denuncia. La violencia digital es un delito y tiene consecuencias legales.'
+      },
+      simbolica: {
+        title: '🎭 Violencia Simbólica',
+        description: 'Mensajes, valores, íconos o signos que transmiten y reproducen relaciones de dominación, desigualdad y discriminación.',
+        details: [
+          'Publicidad que cosifica a las mujeres',
+          'Estereotipos de género en medios',
+          'Lenguaje sexista o discriminatorio',
+          'Roles tradicionales impuestos',
+          'Doble moral en temas de sexualidad',
+          'Naturalización de la violencia de género',
+          'Minimización de las capacidades por género',
+          'Presión sobre la apariencia física',
+          'Canciones o contenido que glorifica la violencia'
+        ],
+        image: '/images/violencia-simbolica.jpg',
+        warning: 'Esta forma de violencia es sutil pero poderosa. Perpetúa la desigualdad y normaliza otras formas de violencia.'
+      }
+    };
+
+    function showViolenceDetail(type) {
+      const data = violenceData[type];
+      const modal = document.getElementById('violenceModal');
+      const modalBody = document.getElementById('modalBody');
+      
+      const detailsList = data.details.map(detail => `<li>${detail}</li>`).join('');
+      
+      modalBody.innerHTML = `
+        <h2>${data.title}</h2>
+        <img src="${data.image}" alt="${data.title}">
+        <p><strong>${data.description}</strong></p>
+        <h3 style="color:var(--primary);margin-top:24px;margin-bottom:12px;font-size:1.3rem">Manifestaciones:</h3>
+        <ul>${detailsList}</ul>
+        <div style="background:#fff3cd;padding:16px;border-radius:10px;border-left:4px solid var(--warning);margin-top:20px">
+          <strong style="color:var(--warning)">⚠️ Importante:</strong>
+          <p style="margin-top:8px;color:var(--text-dark)">${data.warning}</p>
+        </div>
+      `;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('violenceModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cerrar modal al hacer click fuera del contenido
+    document.getElementById('violenceModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Autotest
+    const checkBtn = document.getElementById('checkBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const testResult = document.getElementById('testResult');
+
+    checkBtn.addEventListener('click', () => {
+      const answers = [
+        document.getElementById('q1').value,
+        document.getElementById('q2').value,
+        document.getElementById('q3').value,
+        document.getElementById('q4').value,
+        document.getElementById('q5').value
+      ];
+
+      if (answers.includes('')) {
+        alert('Por favor responde todas las preguntas.');
+        return;
+      }
+
+      const yesCount = answers.filter(a => a === 'si').length;
+      
+      if (yesCount >= 3) {
+        testResult.innerHTML = `
+          <div class="result danger">
+            <strong>⚠️ Señal de Alerta</strong><br>
+            Has respondido afirmativamente a ${yesCount} preguntas. Existen señales claras de posible violencia. 
+            <strong>Busca apoyo inmediato</strong> con servicios locales o personas de confianza. 
+            Si estás en riesgo, llama a emergencias: <a href="tel:100" style="color:inherit">100</a>
+          </div>
+        `;
+      } else if (yesCount >= 1) {
+        testResult.innerHTML = `
+          <div class="result warning">
+            <strong>⚠️ Atención</strong><br>
+            Has respondido afirmativamente a ${yesCount} pregunta(s). Hay indicios que requieren observación. 
+            Considera hablar con alguien de confianza o con un servicio de apoyo.
+          </div>
+        `;
+      } else {
+        testResult.innerHTML = `
+          <div class="result safe">
+            <strong>✓ Sin señales evidentes</strong><br>
+            No se detectaron señales fuertes en este autotest. Mantén atención y busca ayuda si algo cambia.
+          </div>
+        `;
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      ['q1','q2','q3','q4','q5'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      testResult.innerHTML = '';
+    });
+
+    // Reports - Local Storage
+    const saveBtn = document.getElementById('saveBtn');
+    const viewBtn = document.getElementById('viewBtn');
+    const reportsContainer = document.getElementById('reportsContainer');
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderReports() {
+      const reports = JSON.parse(localStorage.getItem('vg_reports') || '[]');
+      
+      if (reports.length === 0) {
+        reportsContainer.innerHTML = '<p style="color:var(--text-muted);font-style:italic">No hay descripciones guardadas.</p>';
+        return;
+      }
+
+      reportsContainer.innerHTML = reports.map((report, idx) => `
+        <div class="report-item">
+          <strong>[${idx + 1}] ${escapeHtml(report.type || 'No especificado')}</strong>
+          <div>${escapeHtml(report.text)}</div>
+          <div class="date">Guardado: ${report.date}</div>
+        </div>
+      `).join('');
+    }
+
+    saveBtn.addEventListener('click', () => {
+      const type = document.getElementById('reportType').value;
+      const text = document.getElementById('reportText').value.trim();
+
+      if (!type || !text) {
+        alert('Por favor completa el tipo y la descripción antes de guardar.');
+        return;
+      }
+
+      const reports = JSON.parse(localStorage.getItem('vg_reports') || '[]');
+      reports.push({
+        type,
+        text,
+        date: new Date().toLocaleString('es-PE')
+      });
+
+      localStorage.setItem('vg_reports', JSON.stringify(reports));
+      alert('✓ Descripción guardada localmente en tu dispositivo.');
+      
+      document.getElementById('reportType').value = '';
+      document.getElementById('reportText').value = '';
+      renderReports();
+    });
+
+    viewBtn.addEventListener('click', renderReports);
+
+    // Initial render
+    renderReports();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
